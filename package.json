@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/esther216/rd-bc-19-maintenance-tracker#readme",
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "body-parser": "1.15.2",
+    "cookie-parser": "1.4.3",
+    "firebase": "3.6.3"
   }
 }
