@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Maintenance Tracker</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="/lib/angular-material/angular-material.css">
+  <link rel="stylesheet" href="/lib/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body ng-app="MaintenanceTracker" ng-controller="FacilityCtrl">
+	<md-toolbar layout="row" layout=xs="column">
+    <div class="md-toolbar-tools" layout="row" layout-xs="column">
+      <span><strong>Maintenace Tracker</strong></span>
+      <span flex></span>
+      <div layout= "row" ng-controller="AppCtrl">
+      	<md-button ng-click="">
+	      	<md-icon class="mdi mdi-library-plus" ng-click="openSideNav()" aria-label="Add Facility"></md-icon>
+	      </md-button>
+	      <md-button>
+	      	<md-icon class="mdi mdi-inbox-arrow-down" aria-label="Requests"></md-icon>
+	      </md-button>
+	       <md-button>
+	      	<md-icon class="mdi mdi-logout" aria-label="Logout"></md-icon>
+	      </md-button>
+      </div>
+		</div>
+	</md-toolbar>
+	<md-sidenav class="md-sidenav-left md-whiteframe-4dp" md-component-id="left">
+		<md-toolbar layout="row">
+			<h1 class="md-toolbar-tools">Add a Facility</h1>
+			<md-button>
+				<md-icon class="mdi mdi-close" ng-click="closeSideNav()" aria-label="Close SideNav"></md-icon>
+			</md-button>
+		</md-toolbar>
+		<md-content layout-padding>
+			<form>
+				<md-input-container>
+				  <label>Facility Name</label>
+				  <input type="text" ng-model="facility.name">
+				</md-input-container>
+				<md-input-container>
+				  <label>Location</label>
+				  <input type="text" ng-model="facility.location">
+				</md-input-container>
+			</form>
+			<md-button class="md-primary md-raised" ng-click="addNewFacility()">Save</md-button>
+		</md-content>
+	</md-sidenav>
+
+	<md-content layout-padding>
+		<h2>All Facilities</h2>
+		
+		<md-list>
+		  <md-list-item class="md-3-line" ng-repeat="facility in allFacilities">
+			  <div class="md-list-item-text" layout="column">
+			    <h3 class="md-title">{{facility.name | uppercase}}</h3>
+			    <p>Location: {{facility.location}}</p>
+			    <p>Date Added: {{facility.date}}</p>
+			  </div>
+			  <md-button class="md-secondary md-icon-button">
+			  	<md-icon class="mdi mdi-delete md-warn" aria-label="Delete Facility"></md-icon>
+			  </md-button>
+
+		  </md-list-item>
+		</md-list>
+		
+	</md-content>
+	
+	<script src="/lib/angular/angular.js"></script>
+	<script src="/lib/angular-aria/angular-aria.js"></script>
+	<script src="/lib/angular-animate/angular-animate.js"></script>
+	<script src="/lib/angular-material/angular-material.js"></script>
+	<script src="/js/app.js"></script>
+	<script src="/js/controllers/app.ctr.js"></script>
+	<script src="/js/controllers/facility.ctr.js"></script>
+</body>
+</html>
