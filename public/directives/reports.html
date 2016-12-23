@@ -1,0 +1,28 @@
+<div class="md-padding">
+	<h1>All Reports</h1>
+	<md-list>
+	  <md-list-item class="md-3-line" ng-repeat="report in reports">
+		  
+	  	<div class="md-list-item-text" layout="column">
+		    <h3 class="md-title">{{report.name | uppercase}}</h3>
+		    <p>Description: {{report.description}}</p>
+		    <p>Sent By: {{report.sentBy}}</p>
+				<p ng-show="report.staffAssigned != 'none'">Staff Assigned: {{report.staffAssigned}}</p>
+				<p ng-show="report.status != 'awaiting'">Status: {{report.status}}</p>
+		    <div layout="row" layout-align="end center">
+			  	<md-button class="md-raised md-primary" ng-click="approve(report, $event)" ng-disabled="report.status == 'approved'">
+				  	<md-icon class="mdi mdi-checkbox-marked-outline" aria-label="Approve"></md-icon>
+				  	approve
+				  </md-button>
+				  <md-button class="md-warn" ng-disabled="report.status == 'approved'">
+				  	<md-icon class="mdi mdi-close" aria-label="Reject"></md-icon>
+				  	reject
+				  </md-button>
+			  </div>
+		  </div>
+		  
+		  <md-divider ng-if="!$last"></md-divider>
+	  </md-list-item>
+		
+	</md-list> 
+</div>
