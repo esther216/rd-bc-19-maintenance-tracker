@@ -11,31 +11,35 @@
 </head>
 <body>
 	<div ng-controller="UserCtrl as admin">
-		<md-toolbar layout="row" layout=xs="column">
+		<md-toolbar class="header" layout="row" layout=xs="column">
 	    <div class="md-toolbar-tools" layout="row" layout-xs="column">
 	      <span><strong>Maintenace Tracker</strong></span>
 	      <span flex></span>
 	     
-	      <md-nav-bar md-selected-nav-item="currentNavItem" aria-label="nav bar">
-				  <md-nav-item md-nav-href="#users" name="users" aria-label="All Users">
-				  	<md-icon class="mdi mdi-account-multiple" ></md-icon>
-				  </md-nav-item>
-				  <md-nav-item md-nav-href="#facilities" name="facilities" aria-label="All Facilities">
-				  	<md-icon class="mdi mdi-library-plus" ></md-icon>
-				  </md-nav-item>
-				  <md-nav-item md-nav-href="#reports" name="reports" aria-label="Reports">
-				  	<md-icon class="mdi mdi-library-plus" ></md-icon>
-				  </md-nav-item>
-				</md-nav-bar>
-				<md-button>
-		      	<md-icon class="mdi mdi-logout" aria-label="Logout" ng-click="admin.signOut()"></md-icon>
-		     </md-button>
+	      <div layout="row">
+	      	<md-nav-bar md-selected-nav-item="currentNavItem" aria-label="nav bar">
+					  <md-nav-item md-nav-href="#users" name="users" aria-label="All Users">
+					  	<md-icon class="mdi mdi-account-multiple"></md-icon>
+					  </md-nav-item>
+					  <md-nav-item md-nav-href="#facilities" name="facilities" aria-label="All Facilities"> 
+					  	<md-icon class="mdi mdi-desktop-tower" ></md-icon>
+					  </md-nav-item>
+					  <md-nav-item md-nav-href="#reports" name="reports" aria-label="Reports">
+					  	<md-icon class="mdi mdi-book-open-page-variant" ></md-icon>
+					  </md-nav-item>
+					</md-nav-bar>
+					<md-button class="nav-icon">
+			      	<md-icon class="mdi mdi-logout" aria-label="Logout" ng-click="admin.signOut()"></md-icon>
+			     </md-button>
+	      </div>
 
 			</div>		<!-- end toolbar -->
 
 		</md-toolbar>
 	
+
 		<ui-view></ui-view>
+		
 		
 	</div>
 	

@@ -1,7 +1,44 @@
 button .material-icons{
-	margin-top: -15px;
+	margin-top: -13px;
 }
+
 button.md-button.md-icon-button > .material-icons{
 	margin:1px auto;
 	font-size: 1.5em;
+}
+
+.header{
+	position: fixed;
+}
+
+h2.margin{
+	margin-top: 1.8em;
+}
+
+.md-nav-bar{
+	border-style: none;
+}
+
+._md-nav-bar-list > .md-nav-item > .md-button{
+	min-width: 0px;
+}
+
+._md-nav-bar-list > .md-nav-item{
+	margin-left: 8px;
+}
+
+._md-nav-bar-list > .md-nav-item > .md-button._md-nav-button{
+	margin: 0px 0px;
+	padding: 12px 8px;
+}
+
+.md-button._md-nav-button > span > md-icon{
+	color: #fff !important;
+	font-size: 1.5em;
+}
+
+button.md-button.nav-icon{
+	min-width: 0px;
+	min-height: 0px;
+	font-size: 1em;
 }

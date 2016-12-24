@@ -1,8 +1,8 @@
-<div class="md-padding">
-	<h1>All Reports</h1>
+<md-content layout="column" layout-padding>
+	<span class="md-margin md-padding"></span>
+	<h2 class="margin md-display-1">All Reports</h2>
 	<md-list>
 	  <md-list-item class="md-3-line" ng-repeat="report in admin.allReports">
-		  
 	  	<div class="md-list-item-text" layout="column">
 		    <h4 class="md-title">{{report.facility.name | uppercase}} <span>({{report.facility.location | lowercase}})</span></h4>
 		    <p>Description: {{report.description}}</p>
@@ -26,4 +26,4 @@
 	  </md-list-item>
 		
 	</md-list> 
-</div>
+</md-content>
