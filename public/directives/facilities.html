@@ -4,7 +4,7 @@
 		<md-sideNav class="md-sidenav-left md-whiteframe-4dp" md-component-id="left">
 			<md-toolbar layout="row">
 				<h1 class="md-toolbar-tools">Add a Facility</h1>
-				<md-button class="md-icon-button" aria-label="Close Side Bar" ng-click="closeSideBar()">
+				<md-button class="md-icon-button" aria-label="Close Side Bar" ng-click="admin.closeFacilitySideBar()">
 					<md-icon class="mdi mdi-close" ></md-icon>
 				</md-button>
 			</md-toolbar>
@@ -12,18 +12,18 @@
 				<form>
 					<md-input-container>
 					  <label>Facility Name</label>
-					  <input type="text" ng-model="newFacility.name">
+					  <input type="text" ng-model="admin.newFacility.name">
 					</md-input-container>
 					<md-input-container>
 					  <label>Location</label>
-					  <input type="text" ng-model="newFacility.location">
+					  <input type="text" ng-model="admin.newFacility.location">
 					</md-input-container>
 				</form>
-				<md-button class="md-primary md-raised" aria-label="Save New Facility" ng-click="saveFacility()">Save</md-button>
+				<md-button class="md-primary md-raised" aria-label="Save New Facility" ng-click="admin.saveNewFacility(admin.newFacility)">Save</md-button>
 			</md-content>
 		</md-sideNav>
 		<span flex></span>
-		<md-button class="md-primary" aria-label="Add New Facility" ng-click="openSideBar()">
+		<md-button class="md-primary" aria-label="Add New Facility" ng-click="admin.openFacilitySideBar()">
 	  	<md-icon class="mdi mdi-library-plus" ></md-icon>
 	  	Add Facility
 	  </md-button>
@@ -31,7 +31,7 @@
 	<h2 class="md-title">All Facilities</h2>
 	<div>
 		<md-list>
-		  <md-list-item class="md-3-line" ng-repeat="facility in facilities">
+		  <md-list-item class="md-3-line" ng-repeat="facility in admin.allFacilities">
 			  <div class="md-list-item-text" layout="column">
 			    <h3 class="md-title">{{facility.name | uppercase}}</h3>
 			    <p>Location: {{facility.location}}</p>

@@ -1,14 +1,14 @@
 <div class="md-padding">
 	<h1>All Users</h1>
 	<md-list>
-	  <md-list-item class="md-3-line" ng-repeat="staff in users">
+	  <md-list-item class="md-3-line" ng-repeat="staff in admin.allUsers">
 		  <div class="md-list-item-text" layout="column">
 		    <h3 class="md-title">{{staff.name | uppercase}}</h3>
 		    <p>Email: {{staff.email}}</p>
 		    <p>Role: {{staff.role}}</p>
 
 		    <div layout="row" layout-align="end center">
-		    	<md-button class="md-primary md-raised">
+		    	<md-button class="md-primary md-raised" ng-show="staff.role != 'admin'">
 				  	<md-icon class="mdi mdi-account-key" aria-label="Set as Admin"></md-icon>Set as Admin
 				  </md-button>
 		    </div>

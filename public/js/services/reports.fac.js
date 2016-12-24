@@ -3,9 +3,9 @@
 		.module('MaintenanceTracker')
 		.service('ReportService', ReportService);	
 
-		ReportService.$inject = ['$http', '$mdDialog'];
+		ReportService.$inject = ['$http', '$mdDialog', '$mdToast'];
 
-		function ReportService($http, $mdDialog){
+		function ReportService($http, $mdDialog, $mdToast){
 			var service = this;
 
 			service.getAllReports = function(){
@@ -18,11 +18,29 @@
 				return response;
 			};
 
-			service.approve = function(report, event){
-				return showPrompt(report, event);
+			service.approveReport = function(report, event){
+				return showStaffPrompt(report, event);
 			};
 
-			function showPrompt(report, event){
+			service.rejectReport = function(report, event){
+				service.updateReport(report);
+			};
+
+			function DialogController($scope, $mdDialog) {
+		    $scope.hide = function() {
+		      $mdDialog.hide();
+		    };
+
+		    $scope.cancel = function() {
+		      $mdDialog.cancel();
+		    };
+
+		    $scope.answer = function(answer) {
+		      $mdDialog.hide(answer);
+		    };
+		  }
+
+			function showStaffPrompt(report, event){
 				var confirm = $mdDialog.prompt()
 		      .title('Assign a Staff')
 		      .placeholder('Staff Name')
@@ -37,8 +55,17 @@
 		      report.staffAssigned = result;
 		      service.updateReport(report);
 		    }, function() {
-		      console.log("no input");
+		      showToast("Action Cancelled");
 		    });
+			}
+
+			function showToast(message){
+				$mdToast.show(
+					$mdToast.simple()
+						.content(message)
+						.position('top, right')
+						.hideDelay(3000)
+				);
 			}
 		}
 })();

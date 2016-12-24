@@ -10,31 +10,66 @@
 	
 </head>
 <body>
-	<div ng-controller="AdminCtrl as staff">
+	<div ng-controller="UserCtrl as staff">
 		<md-toolbar layout="row" layout=xs="column">
 	    <div class="md-toolbar-tools" layout="row" layout-xs="column">
 	      <span><strong>Maintenace Tracker</strong></span>
 	      <span flex></span>
-	     
-	      <md-nav-bar md-selected-nav-item="currentNavItem" aria-label="nav bar">
-				  <md-nav-item md-nav-href="#sendreport" name="sendreport" aria-label="Send Report">
+	     	<div layout="row">
+	     		<md-button class="md-raised md-primary" aria-label="Send Report" ng-click="staff.openReportSideBar()">
 				  	<md-icon class="mdi mdi-send" ></md-icon>
-				  </md-nav-item>
-
-				  <md-nav-item md-nav-href="#notifications" name="notifications" aria-label="Notifications">
+				  </md-button>
+				  <md-button class="md-raised md-primary" aria-label="Notifications" ng-click="staff.showNotifications()">
 				  	<md-icon class="mdi mdi-bell-ring-outline" ></md-icon>
-				  </md-nav-item>
-
-				</md-nav-bar>
-				<md-button ng-click="staff.signOut()">
+				  </md-button>
+				  <md-button class="md-raised md-primary" ng-click="staff.signOut()">
 		      	<md-icon class="mdi mdi-logout" aria-label="Logout"></md-icon>
-		     </md-button>
-
+		    	</md-button>
+	     	</div>
+				
 			</div>		<!-- end toolbar -->
 
 		</md-toolbar>
-			<h1>Hello, {{staff.data[1]}}</h1>
-		<ui-view></ui-view>
+		<md-sideNav class="md-sidenav-left md-whiteframe-4dp" md-component-id="left">
+			<md-toolbar layout="row">
+				<h1 class="md-toolbar-tools">Report a Case</h1>
+				<md-button class="md-icon-button" aria-label="Close Side Bar" ng-click="staff.closeReportSideBar()">
+					<md-icon class="mdi mdi-close" ></md-icon>
+				</md-button>
+			</md-toolbar>
+			<md-content layout-padding>
+				<form layout="column">
+					<md-input-container>
+					  <label>Facility Name</label>
+					  <md-select name="favoriteColor" ng-model="staff.newReport.facility" required>
+		          <md-option ng-value="facility" ng-repeat="facility in staff.allFacilities">{{facility.name}} ({{facility.location | lowercase}})</md-option>
+		        </md-select>
+					</md-input-container>
+					<md-input-container>
+					  <label>Description</label>
+					  <input type="text" ng-model="staff.newReport.description">
+					</md-input-container>
+					<div layout="row">
+						<a class="md-primary" ng-click="selectImage = true">Add Image (optional)</a>
+						<span flex></span>
+						<a class="md-primary" ng-click="selectImage = false">
+							<md-icon class="mdi mdi-close" ></md-icon>
+						</a>
+					</div>
+					<md-input-container ng-show="selectImage">
+					  <input type="file" ng-model="staff.newReport.image" aria-label="Select an Image">
+					</md-input-container>
+					<span class="md-caption">Sent By: {{staff.newReport.sentBy | uppercase}}</span>
+				</form>
+				<div layout="row" layout-align="end">
+					<md-button class="md-primary md-raised" aria-label="Send Report" ng-click="staff.sendReport(staff.newReport)">Send</md-button>
+				</div>
+			</md-content>
+		</md-sideNav>
+		<md-content layout-padding>
+			<h1>Hello, {{staff.data[1]}}</h1>	
+		</md-content>
+				
 		
 	</div>
 	
@@ -47,6 +82,7 @@
 	
 	<script src='/js/services/reports.fac.js'></script>
 	<script src='/js/services/users.fac.js'></script>
-	<script src="/js/controllers/admin.ctr.js"></script>
+	<script src='/js/services/facilities.fac.js'></script>
+	<script src="/js/controllers/user.ctr.js"></script>
 </body>
 </html>

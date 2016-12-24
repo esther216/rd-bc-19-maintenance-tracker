@@ -36,7 +36,20 @@ app.get('/users', function(req, res){
 
 app.post('/users', function(req, res){
 	if ( req.body.hasOwnProperty("name") === true ){
-		console.log("new sign up");
+		var newUser = req.body;
+		
+		firebase.auth().createUserWithEmailAndPassword(newUser.email, newUser.password)
+			.then(function(user){
+				newUser.id = user.uid;
+				newUser.role = "staff";
+				delete newUser['password'];
+				usersRef.push(newUser);
+				res.cookie('currentUser', [newUser.id, newUser.name].toString());
+				res.send({redirect: '/staff'});
+			})
+			.catch(function(error){
+				res.send(error);
+			});
 	}
 	else{
 		firebase.auth().signInWithEmailAndPassword(req.body.email, req.body.password)
@@ -49,10 +62,6 @@ app.post('/users', function(req, res){
 				
 			})
 			.catch(function(error) {
-			  // Handle Errors here.
-			  // var errorCode = error.code;
-			  // var errorMessage = error.message;
-			  console.log(error.message);
 			  res.send(error.message);
 			});
 	}
@@ -107,7 +116,7 @@ app.post('/reports', function(req, res){
 			});	
 	}
 	else{
-		console.log("create in database");
+		requestsRef.push(req.body);
 	}
 	res.send("ok");
 });
