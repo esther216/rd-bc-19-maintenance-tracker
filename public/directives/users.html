@@ -1,20 +1,44 @@
-<md-content layout="column" layout-padding>
-	<span class="md-margin md-padding"></span>
-	<h2 class="margin md-display-1">All Users</h2>
-	<md-list>
-	  <md-list-item class="md-3-line" ng-repeat="staff in admin.allUsers">
-		  <div class="md-list-item-text" layout="column">
-		    <h3 class="md-title">{{staff.name | uppercase}}</h3>
-		    <p>Email: {{staff.email}}</p>
-		    <p>Role: {{staff.role}}</p>
+<md-content layout="row" layout-xs="column" layout-padding layout-wrap layout-align-gt-xs="center">
 
-		    <div layout="row" layout-align="end center">
-		    	<md-button class="md-primary md-raised" ng-show="staff.role != 'admin'">
-				  	<md-icon class="mdi mdi-account-key" aria-label="Set as Admin"></md-icon>Set as Admin
-				  </md-button>
-		    </div>
-		  </div>
-		  <md-divider ng-if="!$last"></md-divider>
-	  </md-list-item>
-	</md-list> 
+	<md-card class="fix-margin-top" flex-sm="45" flex-gt-sm="30"  ng-repeat="staff in admin.allUsers">
+    <md-card-header>
+      <md-card-avatar>
+        <md-icon class="mdi mdi-image" aria-label="staff image"></md-icon>
+      </md-card-avatar>
+      <md-card-header-text>
+        <span class="md-title" ng-show="staff.name == admin.fullName">Me</span>
+        <span class="md-title" ng-hide="staff.name == admin.fullName">{{staff.name|uppercase}}</span>
+        <span class="md-subhead">
+        	{{staff.role}}
+        </span>	
+      </md-card-header-text>
+    </md-card-header>
+    
+    <md-card-content layout="column" class="user-details" ng-show="showDetails">
+      <p><md-icon class="mdi mdi-email" aria-label="email"></md-icon>{{staff.email}}</p>
+      <p><md-icon class="mdi mdi-phone-classic" aria-label="telephone"></md-icon>{{staff.telephone}}</p>
+      <div layout="row" layout-align="end center">
+        <md-button aria-label="hide details" class="md-primary" ng-click="showDetails = false">
+          <md-icon class="mdi mdi-chevron-up" aria-label="details"></md-icon>hide
+        </md-button>
+      </div>
+    </md-card-content>
+    <md-card-actions>
+      <md-toolbar>
+        <div class="md-toolbar-tools" layout-align="center center">
+          <md-button aria-label="details" class="md-icon-button" ng-click="showDetails = true">
+           <md-icon class="mdi mdi-account-card-details" aria-label="show details"></md-icon>
+          </md-button>
+
+          <md-button class="md-accent md-icon-button" ng-show="staff.role != 'admin'" ng-click="admin.setStaffAsAdmin(staff, $event)" aria-label="set user as admin">
+            <md-icon class="mdi mdi-account-key" aria-label="set user as admin"></md-icon>
+          </md-button>
+        
+          <md-button class="md-icon-button md-warn" aria-label="delete user">
+            <md-icon class="mdi mdi-delete" aria-label="Delete User"></md-icon>
+          </md-button>
+        </div>
+      </md-toolbar>
+    </md-card-actions>
+  </md-card>   
 </md-content>

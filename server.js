@@ -35,7 +35,21 @@ app.get('/users', function(req, res){
 });
 
 app.post('/users', function(req, res){
-	if ( req.body.hasOwnProperty("name") === true ){
+	if ( req.body.hasOwnProperty("role") ){
+		usersRef
+			.orderByChild("name")
+			.equalTo(req.body.name)
+			.on('child_added', function(snapshot){
+
+				usersRef.child(snapshot.key)
+					.update({
+						role: req.body.role
+					});
+				res.send("updated");
+			});	
+	}
+
+	else if ( req.body.hasOwnProperty("name") === true ){
 		var newUser = req.body;
 		
 		firebase.auth().createUserWithEmailAndPassword(newUser.email, newUser.password)

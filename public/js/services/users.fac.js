@@ -13,7 +13,6 @@
 				return response;
 			};
 
-
 			service.checkUser = function(userData){
 				var response = $http.post('/users',userData);
 				return response;
@@ -35,6 +34,11 @@
 					return value.pop().replace(/%[0-9]+?\w/g," ").split(" ");
 				}
 				
+			};
+
+
+			service.updateUserRole = function(userData){
+				var response = $http.post('/users', userData);
 			};
 
 			service.signOut = function(){

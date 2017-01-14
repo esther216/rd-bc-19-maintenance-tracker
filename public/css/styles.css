@@ -1,5 +1,5 @@
 button .material-icons{
-	margin-top: -13px;
+	margin-top: -15px;
 }
 
 button.md-button.md-icon-button > .material-icons{
@@ -11,20 +11,54 @@ button.md-button.md-icon-button > .material-icons{
 	position: fixed;
 }
 
+footer{
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.fix-margin-top{
+	margin-top: 4em;
+}
+
 h2.margin{
 	margin-top: 1.8em;
 }
+
+.icon-title{
+	font-size: 1.5em;
+	padding: 0.5em;
+}
+
+.large{
+	font-size: 2em;
+}
+
+.medium{
+	font-size: 1.5em;
+}
+
+.card-media{
+  background-color: rgb(0,150,136);
+}
+
+.md-media-md{
+	height: 120px;
+	width: 120px;
+}
+
+md-fab-toolbar.md-right md-fab-trigger.align-with-text {
+  left: -7px; 
+}
+
+
 
 .md-nav-bar{
 	border-style: none;
 }
 
-._md-nav-bar-list > .md-nav-item > .md-button{
-	min-width: 0px;
-}
-
 ._md-nav-bar-list > .md-nav-item{
-	margin-left: 8px;
+	margin-left: -8px;
 }
 
 ._md-nav-bar-list > .md-nav-item > .md-button._md-nav-button{
@@ -32,13 +66,11 @@ h2.margin{
 	padding: 12px 8px;
 }
 
+._md-nav-bar-list > .md-nav-item > .md-button{
+	min-width: 78px;
+}
+
 .md-button._md-nav-button > span > md-icon{
 	color: #fff !important;
 	font-size: 1.5em;
-}
-
-button.md-button.nav-icon{
-	min-width: 0px;
-	min-height: 0px;
-	font-size: 1em;
 }

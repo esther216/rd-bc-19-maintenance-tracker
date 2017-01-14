@@ -1,0 +1,14 @@
+<md-dialog aria-label="confirm dialog">
+	<md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>New User Sign Up</h2>
+    </div>
+  </md-toolbar>
+  <md-dialog-content layout-padding>
+    <p>Set {{data.name}} as Admin?</p>
+  </md-dialog-content>
+  <md-dialog-actions layout="row" layout-align="center center">
+    <md-button ng-click="cancel()" class="md-primary">No</md-button>
+    <md-button ng-click="confirm()" class="md-primary">Yes</md-button>
+  </md-dialog-actions>
+</md-dialog>

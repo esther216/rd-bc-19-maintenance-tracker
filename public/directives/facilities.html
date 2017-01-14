@@ -1,48 +1,68 @@
-<md-content layout="column" layout-padding layout-fill>
-	<div layout="row">
-		<md-sideNav class="md-sidenav-left md-whiteframe-4dp" md-component-id="left">
-			<md-toolbar layout="row">
-				<h1 class="md-toolbar-tools">Add a Facility</h1>
-				<md-button class="md-icon-button" aria-label="Close Side Bar" ng-click="admin.closeFacilitySideBar()">
-					<md-icon class="mdi mdi-close" ></md-icon>
-				</md-button>
-			</md-toolbar>
-			<md-content layout-padding>
-				<form>
-					<md-input-container>
-					  <label>Facility Name</label>
-					  <input type="text" ng-model="admin.newFacility.name">
-					</md-input-container>
-					<md-input-container>
-					  <label>Location</label>
-					  <input type="text" ng-model="admin.newFacility.location">
-					</md-input-container>
-				</form>
-				<md-button class="md-primary md-raised" aria-label="Save New Facility" ng-click="admin.saveNewFacility(admin.newFacility)">Save</md-button>
-			</md-content>
-		</md-sideNav>
-		<span flex></span>
-		<md-button class="md-primary" aria-label="Add New Facility" ng-click="admin.openFacilitySideBar()">
-	  	<md-icon class="mdi mdi-library-plus" ></md-icon>
-	  	Add Facility
-	  </md-button>
-	</div>
-	<h2 class="md-display-1">All Facilities</h2>
-	<div>
-		<md-list>
-		  <md-list-item class="md-3-line" ng-repeat="facility in admin.allFacilities">
-			  <div class="md-list-item-text" layout="column">
-			    <h3 class="md-title">{{facility.name | uppercase}}</h3>
-			    <p>Location: {{facility.location}}</p>
-			    <div layout="row" layout-align="end center">
-			    	<md-button class="md-warn md-raised md-icon-button">
-					  	<md-icon class="mdi mdi-delete" aria-label="Delete Facility"></md-icon>
-					  </md-button>
-			    </div>
-			  </div>
-			  <md-divider ng-if="!$last"></md-divider>
-		  </md-list-item>
-		</md-list> 
-		
-	</div>
-</md-content>
+<div layout="column">
+  <section layout="row" flex>
+    <md-sideNav class="md-sidenav-left md-whiteframe-4dp" md-component-id="left">
+      <md-toolbar layout="row">
+        <h1 class="md-toolbar-tools">New Facility</h1>
+        <md-button class="md-icon-button" aria-label="Close Side Bar" ng-click="admin.closeFacilitySideBar()">
+          <md-icon class="mdi mdi-close" ></md-icon>
+        </md-button>
+      </md-toolbar>
+      <md-content layout-padding>
+        <form>
+          <md-input-container>
+            <label>Facility Name</label>
+            <input type="text" ng-model="admin.newFacility.name">
+          </md-input-container>
+          <md-input-container>
+            <label>Location</label>
+            <input type="text" ng-model="admin.newFacility.location">
+          </md-input-container>
+        </form>
+        <md-button class="md-primary md-raised" aria-label="Save New Facility" ng-click="admin.saveNewFacility(admin.newFacility)">Save</md-button>
+      </md-content>
+    </md-sideNav>
+    
+    
+  </section>
+  <md-content layout="column" layout-padding>
+    <div layout="row" layout-align="end center">
+      <span flex></span>
+      <md-button class="md-primary md-raised" aria-label="Add New Facility" ng-click="admin.openFacilitySideBar()">
+        <md-icon class="mdi mdi-library-plus" ></md-icon>
+        Add Facility
+      </md-button> 
+    </div>
+    <div layout="column" layout-gt-xs="row" layout-wrap layout-align-gt-xs="center">
+      <md-card flex-sm="45" flex-gt-sm="30" ng-repeat="facility in admin.allFacilities">
+        <md-card-header>
+          <md-card-header-text>
+            <span class="md-title">{{facility.name|uppercase}}</span>
+            <span class="md-subhead">{{facility.location}}</span>
+          </md-card-header-text>
+        </md-card-header>
+        
+        <md-card-content ng-show="editFacility">
+          <md-input-container>
+            <label>Facility Name</label>
+            <input ng-model="facility.name">
+          </md-input-container>
+          <md-input-container>
+            <label>Location</label>
+            <input ng-model="facility.location">
+          </md-input-container>
+          <md-button class="md-warn" ng-click="editFacility = false">cancel</md-button>
+          <md-button class="md-primary">save</md-button>
+        </md-card-content>
+
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button class="md-icon-button" aria-label="edit facility" ng-click="editFacility = true">
+            <md-icon class="mdi mdi-pencil md-primary" aria-label="Edit Facility"></md-icon>
+          </md-button>
+          <md-button class="md-icon-button" aria-label="delete facility">
+            <md-icon class="mdi mdi-delete md-warn" aria-label="delete facility"></md-icon>
+          </md-button> 
+        </md-card-actions>
+      </md-card> 
+    </div>
+  </md-content>
+</div>
