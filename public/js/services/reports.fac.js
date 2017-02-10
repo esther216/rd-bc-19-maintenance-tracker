@@ -26,6 +26,11 @@
 				service.updateReport(report);
 			};
 
+			service.deleteReport = function(report){
+				var response = $http.post('/delete', report);
+				console.log(response);
+			};
+
 			function DialogController($scope, $mdDialog) {
 		    $scope.hide = function() {
 		      $mdDialog.hide();

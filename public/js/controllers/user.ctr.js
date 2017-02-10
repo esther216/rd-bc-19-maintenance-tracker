@@ -3,15 +3,17 @@
 		.module('MaintenanceTracker')
 		.controller('UserCtrl', UserCtrl);	
 		
-		UserCtrl.inject = ['UserService', 'FacilityService' ,
-		 'ReportService', '$mdSidenav', '$mdToast', '$mdBottomSheet',
-		 '$mdDialog'];
+		UserCtrl.inject = ['UserService', 'FacilityService',
+		 'ControlService', 'ReportService', '$mdSidenav', 
+		 '$mdToast', '$mdBottomSheet', '$mdDialog'];
 
 		function UserCtrl(UserService, FacilityService, ReportService, 
-			$mdSidenav, $mdToast, $mdBottomSheet, $mdDialog){
+			ControlService, $mdSidenav, $mdToast, $mdBottomSheet, 
+			$mdDialog){
 			var user = this;
 			user.data = UserService.getUserCookie("currentUser");
 			user.fullName = user.data[1] + " " + user.data[2];
+
 			user.newReport = {
 				status: "awaiting",
 				sentBy: user.data[1]+" "+user.data[2],
@@ -97,6 +99,59 @@
 				confirmAdmin(user, event);
 			};
 			
+			user.deleteFacility = function(facility, $event){
+
+				var body = {
+					title: "Delete Facility",
+					messages: {
+						message1: "Are you sure you want to delete this facility: " 
+						+ facility.name + " ?"
+					}
+				};
+				
+				ControlService.openDeleteDialog(body, $event)
+					.then(function(){
+						user.allFacilities.pop(facility);
+						FacilityService.deleteFacility(facility);
+						showToast("Facility Deleted!");
+					});
+			};
+
+			user.deleteReport = function(report, $event){
+
+				var body = {
+					title: "Confirm Delete",
+					messages: {
+						message1: "Description: "+report.description,
+						message2: "SentBy: "+report.sentBy
+					}
+				};
+				
+				ControlService.openDeleteDialog(body, $event)
+					.then(function(){
+						user.allReports.pop(report);
+						ReportService.deleteReport(report);
+						showToast("Report Deleted!");
+					});
+			};
+
+			user.deleteStaff = function(staff, $event){
+
+				var body = {
+					title: "Confirm Delete",
+					messages: {
+						message: "Are you sure you want to delete this user: "
+								+staff.name
+					}
+				};
+				
+				ControlService.openDeleteDialog(body, $event)
+					.then(function(){
+						console.log(staff);
+						UserService.deleteStaff(staff);
+					});
+			};
+
 
 // Load all data from seerver
 			function loadAllData(){

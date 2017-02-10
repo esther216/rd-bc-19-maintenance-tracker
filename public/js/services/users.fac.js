@@ -36,9 +36,13 @@
 				
 			};
 
-
 			service.updateUserRole = function(userData){
 				var response = $http.post('/users', userData);
+			};
+
+			service.deleteStaff = function(staff){
+				var response = $http.post('/delete', staff);
+				console.log(response);
 			};
 
 			service.signOut = function(){

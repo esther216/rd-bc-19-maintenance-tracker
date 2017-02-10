@@ -14,6 +14,10 @@
             <input type="text" ng-model="admin.newFacility.name">
           </md-input-container>
           <md-input-container>
+            <label>Facility ID (FID)</label>
+            <input type="text" ng-model="admin.newFacility.fid">
+          </md-input-container>
+          <md-input-container>
             <label>Location</label>
             <input type="text" ng-model="admin.newFacility.location">
           </md-input-container>
@@ -32,12 +36,19 @@
         Add Facility
       </md-button> 
     </div>
-    <div layout="column" layout-gt-xs="row" layout-wrap layout-align-gt-xs="center">
+
+    <div layout-align="center" ng-show="admin.allFacilities.length == 0">
+      <h1>No Facility</h1>
+    </div>
+
+    <div layout="row" layout-xs="column" layout-padding layout-wrap layout-align-gt-xs="center">
+
       <md-card flex-sm="45" flex-gt-sm="30" ng-repeat="facility in admin.allFacilities">
         <md-card-header>
           <md-card-header-text>
             <span class="md-title">{{facility.name|uppercase}}</span>
-            <span class="md-subhead">{{facility.location}}</span>
+            <span class="md-subhead">{{[facility.fid]}}</span>
+            <span class="md-subhead">{{facility.location|uppercase}}</span>
           </md-card-header-text>
         </md-card-header>
         
@@ -45,6 +56,10 @@
           <md-input-container>
             <label>Facility Name</label>
             <input ng-model="facility.name">
+          </md-input-container>
+          <md-input-container>
+            <label>Facility ID (FID)</label>
+            <input ng-model="facility.fid">
           </md-input-container>
           <md-input-container>
             <label>Location</label>
@@ -58,7 +73,7 @@
           <md-button class="md-icon-button" aria-label="edit facility" ng-click="editFacility = true">
             <md-icon class="mdi mdi-pencil md-primary" aria-label="Edit Facility"></md-icon>
           </md-button>
-          <md-button class="md-icon-button" aria-label="delete facility">
+          <md-button class="md-icon-button" aria-label="delete facility" ng-click="admin.deleteFacility(facility, $event)">
             <md-icon class="mdi mdi-delete md-warn" aria-label="delete facility"></md-icon>
           </md-button> 
         </md-card-actions>

@@ -2,6 +2,10 @@
 	<!-- <span class="md-margin md-padding"></span>
 	<h2 class="margin md-display-1">All Reports</h2> -->
 	
+  <div ng-show="admin.allReports.length == 0">
+    <h1>No Reports</h1>
+  </div>
+
   <md-card class="fix-margin-top" flex-sm="45" flex-gt-sm="30" ng-repeat="report in admin.allReports">
     <md-card-title>
       <md-card-title-text>
@@ -42,7 +46,7 @@
           <md-icon class="mdi mdi-close" aria-label="Reject"></md-icon>
         </md-button>
         
-        <md-button class="md-icon-button md-warn" ng-click="">
+        <md-button class="md-icon-button md-warn" ng-click="admin.deleteReport(report, $event)">
           <md-icon class="mdi mdi-delete" aria-label="delete report"></md-icon>
         </md-button>
 

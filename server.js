@@ -4,8 +4,10 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var firebase = require('firebase');
 
+
 var port = process.env.PORT || 8080;
 var config = require('./config/db.js').config;
+var data = require('./data.js');
 
 var app = express();
 firebase.initializeApp(config);
@@ -154,7 +156,45 @@ app.post('/logout', function(req, res){
 	res.send({redirect: '/'});
 });
 
-app.listen(port);
-console.log('Maintenance Tracker Application Is Running On Port: '+ port);
+app.post('/delete', function(req, res){
+	if (req.body.hasOwnProperty('description')) {
+		requestsRef
+			.orderByChild("description")
+			.equalTo(req.body.description)
+			.on('child_added', function(snapshot){
+				requestsRef.child(snapshot.key)
+					.set(null);
+				//res.send("updated");
+			});
+	}
 
+	else if (req.body.hasOwnProperty('fid')) {
+		facilitiesRef
+			.orderByChild("fid")
+			.equalTo(req.body.fid)
+			.on('child_added', function(snapshot){
+				facilitiesRef.child(snapshot.key)
+					.set({
+						location: null,
+						name: null
+					});
+				//res.send("updated");
+			});	
+	}
+	
+	else if (req.body.hasOwnProperty('role')) {
+		console.log("delete a user");
+	}
+	
+	else{
+		console.log("Can't complete operation");
+	}
+	
+});
+
+
+app.listen(port);
+console.log('##########################################################');
+console.log('Maintenance Tracker App is Ready on Port: '+ port);
+console.log('##########################################################');
 exports = module.exports = app;

@@ -1,0 +1,22 @@
+<md-dialog aria-label="confirm dialog">
+	<md-toolbar class="md-warn">
+    <div class="md-toolbar-tools">
+      <h2>{{body.title}}</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" aria-label="cancel dialog" ng-click="cancelDialog()">
+        <md-icon class="mdi mdi-close" ></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-dialog-content layout-padding>
+    
+    <ul>
+      <li ng-repeat="message in body.messages">{{message}}</li>
+    </ul>
+    
+  </md-dialog-content>
+  <md-dialog-actions layout="row" layout-align="center center">
+    <md-button ng-click="cancelDialog()" class="md-warn">cancel</md-button>
+    <md-button ng-click="response(body.response)" class="md-primary md-raised">continue</md-button>
+  </md-dialog-actions>
+</md-dialog>
