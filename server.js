@@ -9,14 +9,19 @@ var port = process.env.PORT || 8080;
 var config = require('./config/db.js').config;
 var data = require('./data.js');
 
+// Initialise app
 var app = express();
+
+// Firebase setup
 firebase.initializeApp(config);
 
+// Initialise database and references
 var db = firebase.database();
 var usersRef = db.ref('users');
 var facilitiesRef = db.ref('facilities');
 var requestsRef = db.ref('requests');
 
+// Middlewares
 app.use(bodyParser.json());
 app.use(bodyParser.json({type: 'application/vnd.api+json'}));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -24,7 +29,7 @@ app.use(cookieParser());
 
 app.use(express.static(__dirname + '/public'));
 
-
+// Routes
 app.get('/', function(req, res){
 	res.sendFile(path.join(__dirname, '/public', 'index.html'));
 });
@@ -183,7 +188,9 @@ app.post('/delete', function(req, res){
 	}
 	
 	else if (req.body.hasOwnProperty('role')) {
+		// will have to work on this later. no solution yet.
 		console.log("delete a user");
+		res.send('deleted');
 	}
 	
 	else{
